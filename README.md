@@ -58,23 +58,46 @@ In essence, a block contains different sample types or "class" run in a specific
 - **Quality Checks (QC or dQC)**: Mixture of all samples to monitor signal consistency. Pooled QC in the schema. dQC is a diluted version of the QC and can also be considered a normal QC 
 
 Do not worry about the technical details of the experiment, you must gather at this stage samples have different class and purposes within the experiment. 
-Your input data is summarized in three files, all in `data/input` in csv format:1. **Data Matrix** (NxM): - Rows: Sample IDs (N samples) - Columns: Feature IDs (M features) - Values: Peak areas
+Your input data is summarized in three files, all in `data/input` in csv format:
+1. **Data Matrix** (NxM): 
+- Rows: Sample IDs (N samples) 
+- Columns: Feature IDs (M features) 
+- Values: Peak areas
 
 2. **Feature Metadata** (MxK): 
-- Rows: Feature IDs (M features)\
- - Columns: Feature descriptors (RT, m/z) (K descriptors)\
+- Rows: Feature IDs (M features)
+- Columns: Feature descriptors (RT, m/z) (K descriptors)
 3. **Acquisition List** (NxD): 
-- Sample metadata including batch and run order (D descriptors)\
- - Rows: Sample IDs (N samples)\
+- Sample metadata including batch and run order (D descriptors)
+- Rows: Sample IDs (N samples)
 4. **Exogenous Standards** (Sxk):
  - Rows: Exogenous standards IDs (S standards): They are identified by GUn corresponding to the glycan unit, e.g. GU4 is composed of four glycan units from a Maltodextrin ladder.
   - Columns: Feature descriptors (RT, m/z) (k descriptors)
 
 ### A - Exploratory Data Analysis
-Your first task is to inspect the data, understand the dynamics at hand and perform necessary analysis to assess if the experiments is exploitable for biomarker discovery. As the analytical platform can introduce measurement bias, it's crucial to monitor both technical variability (from the instrument) and biological variability (true differences between samples).
-Some metrics to consider:• Coefficient of variation (CV): Captures variability in peak area across samples• D-Ratio: Compares technical to biological variation
+Your first task is to inspect the data, understand the dynamics at hand and perform necessary analysis to assess if the experiments is exploitable for biomarker discovery. 
+
+As the analytical platform can introduce measurement bias, it's crucial to monitor both technical variability (from the instrument) and biological variability (true differences between samples).
+
+Some metrics to consider:
+- Coefficient of variation (CV): Captures variability in peak area across samples
+- D-Ratio: Compares technical to biological variation
+
 You can find more on these metrics in the resources section.
-To guide your analysis, consider these questions:1. How many features have been detected, how is the distribution across mz and retention time, and across classes? 1.a How do you interpret differences between QC classes and sample classes? Does it correspond to an expected behavior? 2. How is the contamination in the experiment? How would you mitigate this effect moving forward?3. Are the standards detected consistently across the experiment?4. How is the distribution of intensities across the classes? Are there any trends with respect to classes, run order? 1.a How do you interpret differences? Does it correspond to expected behavior? 5. How are QCs between the batches? How would you qualify measurement stability?
+
+
+To guide your analysis, consider these questions:
+1. Are there features that could correspond to isomers (same mass but diffrent retention time)?
+2. Are there features that could correspond to isotopes or adducts (same retention time but different mass)
+3. Is there any correlation (in terms of peak area) between isomers ? between isotopes? 
+4. How many features have been detected, how is the distribution of detection rate across mz and retention time, and across classes? **NB:** you can set a threshold of minimal intensity to consider a peak detected. 
+   - How do you interpret differences between QC classes and sample classes? Does it correspond to an expected behavior? 
+5. How is the contamination in the experiment? How would you mitigate this effect moving forward?
+6. Are the standards detected consistently across the experiment?
+7. How is the distribution of intensities across the classes? Are there any trends with respect to classes, run order? 
+   - How do you interpret differences? Does it correspond to expected behavior? 
+8. How are QCs between the batches? How would you qualify measurement stability?
+
 You are encouraged to provide figures, summary statistics to motivate any insights you gather. Feel free to expand from these questions to interrogate other aspects of the data. Make sure to analyze each figure, we judge the quality of the EDA from your ability to connect discoveries. It is preferred to limit the insights to a few but thouroughly explored rather than point out various obervations wihtout much depth. 
 
 **Important Note:** For the following parts of this exercise we ask you to limit the analysis to only batch1 since batch2 does not contain any sample data.
@@ -115,18 +138,23 @@ Your task is to create an embedding space for the glycan libraries that captures
 
 You can validate your learned representation by assessing the closeness of the N-glycans in the new embedding space. The N-glycans list is provided in the N-Glycans.pkl. You can refer to the glycowork notebooks [00_core.ipynb](https://github.com/BojarLab/glycowork/blob/master/00_core.ipynb) for more information on the N-glycans.
 For this task, head to the data/glycan_embedding folder. You will find the following files:
-- glycan_list.csv: The list of glycans you will embed for inference and enrichment.- df_glycan.pkl: The glycan sequences to use for the learning of the embedding space.- glycan_binding.pkl: The protein-glycan binding interactions to enrich the embedding space.- N_glycans_df.pkl: The N-glycans sequences to use for control representation of the embedding space (also used for learning the embedding space)
+- glycan_list.csv: The list of glycans you will embed for inference and enrichment.
+- df_glycan.pkl: The glycan sequences to use for the learning of the embedding space.
+- glycan_binding.pkl: The protein-glycan binding interactions to enrich the embedding space.
+- N_glycans_df.pkl: The N-glycans sequences to use for control representation of the embedding space (also used for learning the embedding space)
+
 The expected output is the enriched list of glycans with information as well as evidence for the utility of the embedding space you created. The more new information you can gather on the structures, the better. Be creative in the approaches you consider - any choice should be justified and insights drawn motivated.
+
 In this part, we are very interested in your approach in setting up a machine learning model. As such we expect you to build understanding with simpler, more interpretable algorithms to bechmark performances. You can than build up with more complex architectures and provide numerical evidence of the improvements provided. 
 # Submission Process
 ### Repository Setup
 
-1. Fork the assignment repository from this [repository](https://github.com/isospec/ml-internships).
+1. Clone the assignment repository from this [repository](https://github.com/isospec/ml-internships) to your own repository.
 2. Create a new branch for your work, in your own repository.
 3. Commit your changes regularly with clear, descriptive messages.
-4. When complete, create a pull request to the main repository.
+4. When complete, create a pull request, in your repository, and share the pull request with us.
 
-### Required DocumentsYour submission should include:
+### Required Documents your submission should include:
 1. All code and analysis files
 2. A reflection.md document containing: 
    - Time spent on each section (E.g 8-10 days Task 1, 4-6 days Task 2) 
@@ -139,7 +167,12 @@ In this part, we are very interested in your approach in setting up a machine le
 
 ## Environment Setup
 
-We use uv for package management - a modern, fast Python package installer and resolver. The project.toml file in the repository specifies all required dependencies, ensuring everyone works with the same environment. The lock file contains the exact versions of the dependencies that were installed. After cloning the repository, simply run `uv sync` and uv will handle the rest, creating a clean, isolated environment for your work. More on uv can be found in the ressources section.
+We use uv for package management - a modern, fast Python package installer and resolver. 
+
+The project.toml file in the repository specifies all required dependencies, ensuring everyone works with the same environment. 
+
+The lock file contains the exact versions of the dependencies that were installed. After cloning the repository, simply run `uv sync` and uv will handle the rest, creating a clean, isolated environment for your work. More on uv can be found in the ressources section.
+
 Alternatively, you can use the requirements.txt file to install the dependencies with any package manager of your choice.
 The provided packages are not exhaustive, you are free to use any other package you deem necessary for your work.
 
@@ -149,6 +182,7 @@ The provided packages are not exhaustive, you are free to use any other package 
 - Comprehensive README.md explaining setup and workflow
 - Well-documented code following PEP 8 guidelines
 - Proper error handling and input validation
+
 ### Evaluation Criteria
 
 - Analytical rigor and statistical soundness
