@@ -136,7 +136,7 @@ Your task is to create an embedding space for the glycan libraries that captures
  - `tissue_sample`: Medium sample collected
  - `tissue_species`: Species associated with the sample collected
 
-You can validate your learned representation by assessing the closeness of the N-glycans in the new embedding space. The N-glycans list is provided in the N-Glycans.pkl. You can refer to the glycowork notebooks [00_core.ipynb](https://github.com/BojarLab/glycowork/blob/master/00_core.ipynb) for more information on the N-glycans.
+You can validate your learned representation by assessing the closeness of the N-glycans in the new embedding space. The N-glycans list is provided in the N-Glycans.pkl. You can refer to the glycowork notebooks [glycowork example notebooks](https://github.com/BojarLab/glycowork/blob/master/) for more information on the N-glycans.
 For this task, head to the data/glycan_embedding folder. You will find the following files:
 - glycan_list.csv: The list of glycans you will embed for inference and enrichment.
 - df_glycan.pkl: The glycan sequences to use for the learning of the embedding space.
@@ -149,7 +149,7 @@ In this part, we are very interested in your approach in setting up a machine le
 # Submission Process
 ### Repository Setup
 
-1. Clone the assignment repository from this [repository](https://github.com/isospec/ml-internships) to your own repository.
+1. Clone the assignment repository from this [repository](https://github.com/isospec/ml-internship) to your own repository.
 2. Create a new branch for your work, in your own repository.
 3. Commit your changes regularly with clear, descriptive messages.
 4. When complete, create a pull request, in your repository, and share the pull request with us.
