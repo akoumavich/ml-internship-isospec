@@ -127,8 +127,8 @@ In this final step your role is to showcase your skills for extracting meaningfu
 In this second phase, your role is to provide interpretation power to your findings. Following the discovery of a biomarker, you are tasked with leveraging third party knowledge around the structure you identified to provide more insights on the origin of this glycan, other diseases it has been identified and proteins it is related to. 
 The laboratory team has successfully identified your discovered molecules using CIRIS technology, providing glycan sequences and structural compositions in the `glycan_list.csv` file. Now comes the exciting challenge of placing these discoveries in the broader context of glycobiology.
 You have access to the glycowork library, a comprehensive glycan dataset which contains, as described by the authors:
-- df_glycan: contains ~50,500 unique glycan sequences, including labels such as ~39,500 species associations, ~19,000 tissue associations, and ~2,500 disease associations
-- glycan_binding: contains >580,000 protein-glycan binding interactions, from 1,465 unique glycan-binding proteins
+- df_glycan: contains ~50,500 unique glycan sequences, including labels such as ~39,500 species associations, ~20,000 tissue associations, and ~1,000 disease associations
+- glycan_binding: contains >790,000 protein-glycan binding interactions, from >2,000 unique glycan-binding proteins
 
 Your task is to create an embedding space for the glycan libraries that captures meaningful relationships between molecules such as sequence proximity, origin similarity, disease commonalities and proteins they interact with. You will then embed your discovered glycans and assess their closeness to other structures to draw conclusions as to their nature. The embedding space can be learned by leveraging the features provided in the glycan_list columns: 
  - `glycan_sequence`: Glycan sequence
