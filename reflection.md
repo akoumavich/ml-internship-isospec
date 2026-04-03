@@ -16,7 +16,7 @@ This assignment was very challenging for me primarily because I had no prior exp
 
 I could only start the assignment about a week after the interview, which left me with limited time. To compensate, I used a coding agent (Claude Code) to speed up the implementation, particularly for data visualization, and copy pasted some code that were already implemented in previous course assignments I took (from the course Foundation Models and Generative AI), like the multi-head attention and BERT, but all the analytical ideas and interpretations were my own.
 
-I also did not have the time or the computational resources to properly tune the hyperparameters of the deep learning model, so the results are far from optimal. That said, it was encouraging to see that even with a rough setup, the embedding visualization produced by my model was cleaner than what the glycowork baseline produced.
+I also did not have the time or the computational resources to properly tune the hyperparameters of the deep learning model, so the results are far from optimal. That said, it was encouraging to see that even with a rough setup, the embedding visualization produced by my model was cleaner than what the glycowork baseline produced, and comparable results on some downstream tasks with no hyperparameter tuning and very few epochs. 
 
 I also, due to time and resource constraints, didn't monitor a validation loss during the training and plot a validation learning curve to see if my model is overfitting. But due, to the low amount of data, in order to do that well, it needs to be a k-fold cross-validation which would've taken too much time.
 
